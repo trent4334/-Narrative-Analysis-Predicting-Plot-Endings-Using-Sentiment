@@ -1,5 +1,3 @@
-# Sentiment-Flow-and-Story-Structure-Analysis-with-R
-
 # Sentiment Flow and Story Structure Analysis with R
 
 This project explores the structure and emotional arc of stories using natural language processing (NLP). By analyzing the placement and sentiment of words across story progressions, the goal is to identify whether a story ends on a “happy note” and uncover words that significantly shape narrative flow.
@@ -29,30 +27,34 @@ Using a collection of short stories, this project:
 
 ---
 
-## 🧪 Functions
+## 📊 Results
 
-| Function Name | Description |
-|---------------|-------------|
-| `make_plot_words()` | Processes raw story text into tokens with relative word positions |
-| `make_interesting_words()` | Identifies words most used at the start or end of stories |
-| `make_word_decile_counts()` | Counts word frequency by decile |
-| `make_sentiments()` | Merges sentiment lexicon and calculates average sentiment by decile |
-| `process_plots_for_modeling()` | Transforms decile sentiment into features and binary labels |
+### 🔠 Word Usage Patterns
+- Words that appear **early in stories** (low median position):
+  - `once`, `dark`, `mysterious`, `began`, `woke`
+- Words that appear **late in stories** (high median position):
+  - `wedding`, `smile`, `finally`, `free`, `joy`
 
----
+> These “interesting words” help distinguish how narratives resolve emotionally.
 
-## 📈 Sample Output
+### ❤️ Sentiment Trends by Story Position
+- Stories were divided into 10 equal-length segments (deciles).
+- Average sentiment score across deciles showed:
+  - **Gradual sentiment increase** in happy-ending stories.
+  - **Neutral-to-negative sentiment trend** in stories without happy resolution.
 
-- Top early words: `dawn`, `once`, `mysterious`
-- Top late words: `freedom`, `wedding`, `smile`
-- Model-ready data includes 9 sentiment deciles + binary `is_happy_ending` variable
+### 🧠 Modeling Features (from `process_plots_for_modeling`)
+- Sentiment per decile was used as features (`decile_1` through `decile_9`)
+- A binary label `is_happy_ending` was generated based on final decile sentiment (≥ 0.5 = happy)
+
+> This creates a labeled dataset ready for classification modeling.
 
 ---
 
 ## 🧰 Tools Used
 
-- **R** (with tidyverse, `tidytext`, `dplyr`, `testthat`)
-- Sentiment lexicon (e.g., NRC or Bing)
+- **R** (tidyverse, `tidytext`, `dplyr`, `testthat`)
+- Sentiment lexicon (e.g., Bing or NRC)
 - Text tokenization and aggregation
 - Functional programming and tidy data design
 
