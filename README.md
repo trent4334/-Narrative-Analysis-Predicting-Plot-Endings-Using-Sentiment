@@ -2,7 +2,7 @@
 
 This project explores the structure and emotional arc of stories using natural language processing (NLP). By analyzing the placement and sentiment of words across story progressions, the goal is to identify whether a story ends on a “happy note” and uncover words that significantly shape narrative flow.
 
-> 📌 Originally developed as part of an NLP module in a university data science course. Adapted for portfolio presentation.
+> 📌 Originally developed as part of an NLP module in NYU data science course. Adapted for portfolio presentation.
 
 ---
 
