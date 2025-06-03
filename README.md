@@ -26,6 +26,25 @@ Using a collection of short stories, this project:
 - **Binary Outcome Labeling:** Classify whether stories have a happy ending based on final decile sentiment
 
 ---
+## 🧪 Functions
+
+| Function Name | Description |
+|---------------|-------------|
+| `make_plot_words()` | Processes raw story text into tokens with relative word positions |
+| `make_interesting_words()` | Identifies words most used at the start or end of stories |
+| `make_word_decile_counts()` | Counts word frequency by decile |
+| `make_sentiments()` | Merges sentiment lexicon and calculates average sentiment by decile |
+| `process_plots_for_modeling()` | Transforms decile sentiment into features and binary labels |
+
+---
+
+## 📈 Sample Output
+
+- Top early words: `dawn`, `once`, `mysterious`
+- Top late words: `freedom`, `wedding`, `smile`
+- Model-ready data includes 9 sentiment deciles + binary `is_happy_ending` variable
+
+---
 
 ## 📊 Results
 
