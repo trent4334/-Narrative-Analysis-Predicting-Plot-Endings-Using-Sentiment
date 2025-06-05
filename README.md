@@ -1,95 +1,113 @@
-# Sentiment Flow and Story Structure Analysis with R
-
-This project explores the structure and emotional arc of stories using natural language processing (NLP). By analyzing the placement and sentiment of words across story progressions, the goal is to identify whether a story ends on a “happy note” and uncover words that significantly shape narrative flow.
-
-> 📌 Originally developed as part of an NLP module in NYU data science course. Adapted for portfolio presentation.
-
----
-
-## 📘 Project Description
-
-Using a collection of short stories, this project:
-- Tokenizes story text into individual words
-- Tracks the **position** of each word within a story (normalized)
-- Applies **sentiment scores** by story decile
-- Identifies “interesting” words with extreme median positions
-- Transforms data for supervised learning to predict **happy endings**
+# 📚 Narrative Analysis & Predicting Plot Endings Using Sentiment  
+## Wikipedia Plot Exploration + Surprise Ending Classifier  
+**Author**: Trent Yu  
+**Technologies**: R, tidyverse, ggplot2, tidytext, sentiment lexicons, logistic regression
 
 ---
 
-## ✨ Key Features
+## 🧠 Project Overview
 
-- **Word Position Analysis:** Normalize each word's position from beginning to end of a story
-- **Sentiment Decile Mapping:** Compute average sentiment by story segment
-- **Word Frequency Filters:** Identify top words used early or late
-- **Feature Engineering:** Prepare data for modeling with imputed sentiment trends
-- **Binary Outcome Labeling:** Classify whether stories have a happy ending based on final decile sentiment
+This project uses natural language processing and sentiment analysis to analyze over 100,000 story plot summaries from Wikipedia. It focuses on two main goals:
 
----
-## 🧪 Functions
+1. **Explore the narrative structure of stories** by identifying words that frequently appear at the beginning or end.
+2. **Build a classifier to predict whether a story ends happily or sadly**, based on sentiment patterns throughout the plot.
 
-| Function Name | Description |
-|---------------|-------------|
-| `make_plot_words()` | Processes raw story text into tokens with relative word positions |
-| `make_interesting_words()` | Identifies words most used at the start or end of stories |
-| `make_word_decile_counts()` | Counts word frequency by decile |
-| `make_sentiments()` | Merges sentiment lexicon and calculates average sentiment by decile |
-| `process_plots_for_modeling()` | Transforms decile sentiment into features and binary labels |
+The project combines tokenization, position-based feature engineering, and logistic regression to uncover textual patterns related to narrative structure and emotional arcs.
 
 ---
 
-## 📈 Sample Output
 
-- Top early words: `dawn`, `once`, `mysterious`
-- Top late words: `freedom`, `wedding`, `smile`
-- Model-ready data includes 9 sentiment deciles + binary `is_happy_ending` variable
+## 📍 Part A – Analyzing Wikipedia Plot Structures
 
----
+### 🎯 Objective
 
-## 📊 Results
+The first half of this project investigates how certain words tend to appear in specific parts of a story — early exposition vs. late resolution. The aim is to:
 
-### 🔠 Word Usage Patterns
-- Words that appear **early in stories** (low median position):
-  - `once`, `dark`, `mysterious`, `began`, `woke`
-- Words that appear **late in stories** (high median position):
-  - `wedding`, `smile`, `finally`, `free`, `joy`
-
-> These “interesting words” help distinguish how narratives resolve emotionally.
-
-### ❤️ Sentiment Trends by Story Position
-- Stories were divided into 10 equal-length segments (deciles).
-- Average sentiment score across deciles showed:
-  - **Gradual sentiment increase** in happy-ending stories.
-  - **Neutral-to-negative sentiment trend** in stories without happy resolution.
-
-### 🧠 Modeling Features (from `process_plots_for_modeling`)
-- Sentiment per decile was used as features (`decile_1` through `decile_9`)
-- A binary label `is_happy_ending` was generated based on final decile sentiment (≥ 0.5 = happy)
-
-> This creates a labeled dataset ready for classification modeling.
+- Identify **narrative-positioned words** using word position deciles
+- Rank words by **median position** and **frequency**
+- Visualize how word distributions change over the course of a plot
 
 ---
 
-## 🧰 Tools Used
+### 📊 Visualization 1: Words by Median Position
 
-- **R** (tidyverse, `tidytext`, `dplyr`, `testthat`)
-- Sentiment lexicon (e.g., Bing or NRC)
-- Text tokenization and aggregation
-- Functional programming and tidy data design
+This plot shows the top 10 words most associated with plot endings and beginnings, based on their **median word position**.
 
----
-
-## 📂 Project Files
-
-- `assignment5.R`: All core functions and helper utilities
-- `assignment5_workflow.Rmd`: Full analysis and narrative exploration
-- `assignment5_workflow.pdf`: Rendered report with results and plots
-
+<img width="754" alt="Screenshot 2025-06-05 at 17 00 55" src="https://github.com/user-attachments/assets/ae0fd447-5919-4ecb-9a12-38ff626c4a31" />
 
 ---
 
-## ✅ Next Steps
+### 📊 Visualization 2: Words by Frequency
 
-- Apply classification models to the `is_happy_ending` variable
-- Compare logistic regression, decision trees, and ensemble models
-- Experiment with transformer-based embeddings for improved sentiment modeling
+This plot highlights the most frequently occurring words across all Wikipedia plot summaries.
+
+<img width="736" alt="Screenshot 2025-06-05 at 17 01 51" src="https://github.com/user-attachments/assets/fc63651b-ebad-4b79-84f9-fe2868890304" />
+
+---
+
+### 📊 Visualization 3: Word Usage by Plot Deciles
+
+Each subplot shows a single word’s frequency distribution across ten deciles (i.e., 10% slices) of the plot.  
+Blue lines = words that peak near the end; Red lines = words that peak near the beginning.
+
+<img width="1043" alt="Screenshot 2025-06-05 at 17 02 16" src="https://github.com/user-attachments/assets/165639f1-323f-4877-9186-45f4b99c0ce2" />
+
+🧠 **Insight**: Words like *"happily"*, *"ending"*, and *"reunited"* peak in the last decile, whereas *"eos"*, *"fictional"*, and *"california"* appear early, suggesting they function as plot openers or metadata.
+
+---
+
+## 🎭 Part B – Predicting Happy vs. Sad Endings
+
+### 🎯 Objective
+
+The second half of this project builds a **logistic regression classifier** to predict whether a story ends happily or sadly based on its sentiment trajectory.
+
+- Deciles 1–9 (the first 90% of the story) are used as features
+- Decile 10 defines the target: is the final part of the story *positive* (≥ 0.5 sentiment)?  
+- Output: `is_happy_ending = 1` (happy) or `0` (sad)
+
+The model enables **reverse storywriting** — using predicted ending sentiment to intentionally write a surprising twist.
+
+---
+
+### ✅ Test on a Real Plot: *Enchanted* (Disney Film)
+
+To evaluate the classifier, I hardcoded the plot of *Enchanted* from The Walt Disney and ran it through the model.
+
+
+📍 **Result**:  
+The classifier predicted a probability of **~0.56**, suggesting a *moderately happy* ending.
+
+---
+
+### ✍️ Writing a Surprising Ending
+
+I rewrote the ending of *Enchanted* to invert the sentiment. The new ending was **deliberately sad**, and my model returned a **decile 10 sentiment of 0.286**, confirming that it met the criteria for sadness.
+
+> **Model-tested result**:  
+> `mean_sentiment (decile 10) = 0.286 → classified as sad`
+
+🧠 **Insight**: This approach proves that you can flip the perceived tone of a story by manipulating word-level sentiment — even without perfect grammatical structure.
+
+---
+
+## 💡 Reflections
+
+- **Narrative arcs** are deeply tied to emotional patterns that show up in word choice and position.
+- Simple models using decile-based sentiment patterns can approximate complex outcomes like "happy" or "sad" endings.
+- **Surprise endings** can be reverse-engineered using sentiment trajectory predictions.
+
+---
+
+## 🧪 Future Extensions
+
+- Train a neural classifier (e.g. LSTM) on token sequences for richer context
+- Add part-of-speech tags to distinguish between expository vs. emotional words
+- Use cosine similarity across plots to find “surprising” stories with similar setups but opposite endings
+
+---
+
+
+## 📝 License
+
+This project is for portfolio and educational purposes. Plot content from Wikipedia is used under fair use for analysis.
