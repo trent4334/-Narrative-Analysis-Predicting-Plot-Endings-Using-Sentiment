@@ -50,7 +50,7 @@ This plot highlights the most frequently occurring words across all Wikipedia pl
 Each subplot shows a single word’s frequency distribution across ten deciles (i.e., 10% slices) of the plot.  
 Blue lines = words that peak near the end; Red lines = words that peak near the beginning.
 
-<img width="1043" alt="Screenshot 2025-06-05 at 17 02 16" src="https://github.com/user-attachments/assets/165639f1-323f-4877-9186-45f4b99c0ce2" />
+<img width="1067" alt="Screenshot 2025-06-05 at 17 04 49" src="https://github.com/user-attachments/assets/252ed7c5-4d84-452f-8150-6ee1d1457018" />
 
 🧠 **Insight**: Words like *"happily"*, *"ending"*, and *"reunited"* peak in the last decile, whereas *"eos"*, *"fictional"*, and *"california"* appear early, suggesting they function as plot openers or metadata.
 
