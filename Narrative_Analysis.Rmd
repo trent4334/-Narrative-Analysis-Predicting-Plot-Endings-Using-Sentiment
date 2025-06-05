@@ -71,9 +71,36 @@ test_process_plots_for_modeling()
 
 # Step 9: Test Model on New Plot ("Enchanted")
 my_plot <- tibble(text = c(
-  "In the magical animated land of Andalasia, a young maiden named Giselle dreams of true love.",
+   "In the magical animated land of Andalasia, a young maiden named Giselle dreams of true love.",
   "Giselle imagines meeting her perfect prince, and her animal friends help her create a statue of him.",
-  ... # (truncated for brevity)
+  "Meanwhile, Prince Edward hears Giselle’s singing voice and is immediately captivated.",
+  "He rushes to find her, and they fall in love at first sight.",
+  "They decide to marry the next day, much to the dismay of Edward's stepmother, Queen Narissa.",
+  "Queen Narissa fears losing her throne if Edward marries and becomes king.",
+  "On Giselle and Edward’s wedding day, Narissa disguises herself as an old hag and lures Giselle to a wishing well.",
+  "Narissa pushes Giselle into the well, which transports her to a world 'where there are no happily ever afters.'",
+  "Giselle emerges from a manhole in modern-day New York City, confused and frightened.",
+  "She wanders around Manhattan in her bridal gown, feeling completely out of place.",
+  "Robert, a cynical divorce lawyer, and his young daughter, Morgan, come across Giselle.",
+  "Though skeptical, Robert lets Giselle stay in his apartment for the night.",
+  "Giselle tries to adjust to New York life but is bewildered by its fast pace and lack of kindness.",
+  "Meanwhile, Prince Edward jumps into the well to rescue Giselle and ends up in New York as well.",
+  "Accompanied by his sidekick, Pip the chipmunk, Edward begins his search for Giselle.",
+  "Giselle uses her magical singing abilities to clean Robert’s apartment with the help of local animals.",
+  "Robert's girlfriend, Nancy, is shocked when she finds Giselle in his apartment and becomes jealous.",
+  "Over time, Giselle and Robert begin to bond, and she learns about the complexities of real relationships.",
+  "Giselle realizes that love isn’t as simple as she thought and feels confused about her feelings for Robert.",
+  "Prince Edward finally finds Giselle, but she seems hesitant to leave with him.",
+  "Queen Narissa’s minion, Nathaniel, follows Edward to New York to prevent him from finding Giselle.",
+  "Nathaniel tries to stop Giselle and Edward from reuniting by tempting her with poisoned apples.",
+  "Giselle takes a bite from one of the apples and begins to feel unwell.",
+  "At a ball, Narissa appears and, seeing her plan unravel, transforms into a dragon to capture Giselle.",
+  "Robert fights Narissa to save Giselle, showing his newfound feelings for her.",
+  "Narissa, in dragon form, kidnaps Robert, but Giselle bravely goes after them.",
+  "With help from Pip, Giselle defeats Narissa, who falls from a great height.",
+  "Giselle realizes that she loves Robert, and they share a kiss that breaks the spell.",
+  "Prince Edward returns to Andalasia with Nancy, where they find their own happy ending.",
+  "Giselle stays in New York with Robert and Morgan, living happily ever after in a blend of fairy tale and real life."
 ))
 
 my_plot_words <- make_plot_words(plots = my_plot, titles = "enchanted")
@@ -83,8 +110,36 @@ predict(ending_model, newdata = my_modeling_data, type = "response")
 
 # Step 10: Generate Rewritten Sad Ending
 my_rewritten_plot <- tibble(text = c(
-  "In the magical land of Andalasia, a young maiden named Giselle dreams of finding true love, but is often lonely and misunderstood.",
-  ... # (truncated for brevity)
+"In the magical land of Andalasia, a young maiden named Giselle dreams of finding true love, but is often lonely and misunderstood.",
+  "Giselle spends her days singing to herself, hoping that one day a prince will come and take her away from her empty life.",
+  "One day, Prince Edward hears Giselle’s voice and rushes to find her, enchanted by her innocence.",
+  "They fall in love at first sight and decide to marry the next day, but Queen Narissa, Edward’s stepmother, is determined to stop the wedding.",
+  "Narissa fears that if Edward marries, she will lose her throne, so she disguises herself as an old hag and tricks Giselle.",
+  "On her wedding day, Narissa pushes Giselle into a well, sending her to a world where fairy tales do not exist.",
+  "Giselle awakens in the gritty streets of New York City, feeling lost, scared, and utterly alone in a place without magic.",
+  "Wandering through the unfamiliar city, Giselle is shocked by the harshness of the real world, where no one stops to help her.",
+  "Eventually, a cynical lawyer named Robert and his young daughter, Morgan, find Giselle and reluctantly let her stay for the night.",
+  "Giselle tries to adjust to this harsh new world, but she feels the weight of her shattered dreams more with each passing day.",
+  "Meanwhile, Prince Edward arrives in New York to rescue Giselle, but quickly becomes lost in the confusing city.",
+  "Giselle, desperate to feel some sense of home, uses her singing to call the local animals, but the city animals are nothing like her Andalasia friends.",
+  "Robert’s girlfriend, Nancy, becomes jealous when she finds Giselle in his apartment, leading to arguments and misunderstandings.",
+  "As the days pass, Giselle starts to fall for Robert, though she’s conflicted and heartbroken over her failed fairy tale with Edward.",
+  "When Edward finally finds Giselle, he is dismayed to see that her spirit has changed, dulled by the harsh reality of New York.",
+  "Queen Narissa’s minion, Nathaniel, arrives in New York to prevent Giselle and Edward from finding happiness together.",
+  "Nathaniel tempts Giselle with a poisoned apple, promising her that it will help her forget her sadness and lost dreams.",
+  "In a moment of despair, Giselle takes a bite of the apple, hoping it will numb the pain she feels from being so far from her magical world.",
+  "As Giselle grows weaker, Robert realizes that he has feelings for her, but his confession comes too late.",
+  "At a masquerade ball, Narissa confronts Giselle, mocking her belief in fairy tales and happy endings.",
+  "Realizing that she has no place in either world, Giselle’s spirit breaks, and she accepts her fate.",
+  "Narissa, seeing her victory, transforms into a dragon and threatens to destroy everything Giselle ever cared about.",
+  "Robert tries to protect Giselle, but Narissa’s strength is too great, and he is gravely injured in the battle.",
+  "With no one left to save her, Giselle watches in despair as her dreams of love and happiness crumble before her eyes.",
+  "Alone and heartbroken, Giselle wanders the streets of New York, feeling abandoned in a world that no longer believes in magic.",
+  "Days turn into weeks, and Giselle becomes a shadow of her former self, her once-bright spirit dulled by sorrow.",
+  "The fairy tale she had dreamed of all her life has ended in tragedy, leaving her isolated and forgotten.",
+  "As she disappears into the endless streets, no one remembers the maiden from Andalasia, and her story fades into obscurity.",
+  "Giselle's dreams are lost forever, and the magic she once believed in is gone, leaving her to live out her days in quiet despair."
+))
 ))
 
 my_rewritten_plot_words <- make_plot_words(plots = my_rewritten_plot, titles = "Enchanted - Sad Version")
